@@ -22,13 +22,6 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y build-essential libcairo2-dev libgraphicsmagick1-dev libpng-dev
 
-    - name: Clone thirdparty repository
-      run: |
-        git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl ${{ github.workspace }}/thirdparty/P0267_RefImpl
-        cd ${{ github.workspace }}/thirdparty/P0267_RefImpl
-        git checkout caa0ba0cb5a421a38bc26afaf3505bee206c44dd
-        cd ${{ github.workspace }}
-
     - name: Install specific CMake version #unfortunately we need CMake 3.11.3 for this project to run
       run: |
         wget https://github.com/Kitware/CMake/releases/download/v3.11.3/cmake-3.11.3-Linux-x86_64.tar.gz
