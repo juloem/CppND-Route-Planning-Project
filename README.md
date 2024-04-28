@@ -1,3 +1,5 @@
+[![GitHub Workflow Status](https://github.com/juloem/CppND-Route-Planning-Project/actions/workflows/build.yml/badge.svg)](https://github.com/juloem/CppND-Route-Planning-Project/actions/workflows/build.yml)
+
 # Route Planning Project
 
 This repo contains the starter code for the Route Planning project.
