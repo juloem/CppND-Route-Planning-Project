@@ -19,12 +19,37 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install specific CMake version
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential libcairo2-dev libgraphicsmagick1-dev libpng-dev
+
+    - name: Clone thirdparty repository
+      run: |
+        git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl ${{ github.workspace }}/thirdparty
+        cd ${{ github.workspace }}/thirdparty/P0267_RefImpl
+        git checkout caa0ba0cb5a421a38bc26afaf3505bee206c44dd
+        cd ${{ github.workspace }}
+
+    - name: Install specific CMake version #unfortunately we need CMake 3.11.3 for this project to run
       run: |
         wget https://github.com/Kitware/CMake/releases/download/v3.11.3/cmake-3.11.3-Linux-x86_64.tar.gz
         tar -zxvf cmake-3.11.3-Linux-x86_64.tar.gz
         sudo mv cmake-3.11.3-Linux-x86_64 /usr/local/cmake-3.11.3
         echo "PATH=/usr/local/cmake-3.11.3/bin:$PATH" >> $GITHUB_ENV
 
-    - name: Check version
-      run: cmake --version
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Create submodule build directory
+      run: mkdir ${{ github.workspace }}/thirdparty/P0267_RefImpl/Debug
+
+    - name: Build io2d
+      run: |
+        cd ${{ github.workspace }}/thirdparty/P0267_RefImpl/Debug
+        cmake --config Debug "-DCMAKE_BUILD_TYPE=Debug" "-DIO2D_WITHOUT_TESTS=1" ..
+        cmake --build
+
+    - name: Build main
+      run: |
+        cd ${{ github.workspace }}/build
+        cmake ..
+        make
