@@ -39,7 +39,7 @@ jobs:
       run: |
         cd ${{ github.workspace }}/thirdparty/P0267_RefImpl/Debug
         cmake --config Debug "-DCMAKE_BUILD_TYPE=Debug" "-DIO2D_WITHOUT_TESTS=1" ..
-        cmake --build
+        cmake --build .
 
     - name: Build main
       run: |
