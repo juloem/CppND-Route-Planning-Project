@@ -1,0 +1,30 @@
+name: Continuous Integration
+on:
+  push:
+    branches:
+      - master
+      - feature/*
+
+  pull_request:
+    branches:
+      -master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install specific CMake version
+      run: |
+        wget https://github.com/Kitware/CMake/releases/download/v3.11.3/cmake-3.11.3-Linux-x86_64.tar.gz
+        tar -zxvf cmake-3.11.3-Linux-x86_64.tar.gz
+        sudo mv cmake-3.11.3-Linux-x86_64 /usr/local/cmake-3.11.3
+        echo "PATH=/usr/local/cmake-3.11.3/bin:$PATH" >> $GITHUB_ENV
+
+    - name: Check version
+      run: cmake --version
