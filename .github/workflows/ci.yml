@@ -24,7 +24,7 @@ jobs:
 
     - name: Clone thirdparty repository
       run: |
-        git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl ${{ github.workspace }}/thirdparty
+        git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl ${{ github.workspace }}/thirdparty/P0267_RefImpl
         cd ${{ github.workspace }}/thirdparty/P0267_RefImpl
         git checkout caa0ba0cb5a421a38bc26afaf3505bee206c44dd
         cd ${{ github.workspace }}
