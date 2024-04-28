@@ -35,12 +35,12 @@ jobs:
     - name: Create submodule build directory
       run: mkdir ${{ github.workspace }}/thirdparty/P0267_RefImpl/Debug
 
-    - name: Build io2d
+    - name: Build
       run: |
         cd ${{ github.workspace }}/thirdparty/P0267_RefImpl/Debug
-        cmake --config Debug "-DCMAKE_BUILD_TYPE=Debug" "-DIO2D_WITHOUT_TESTS=1" ..
+        cmake --config Debug "-DCMAKE_BUILD_TYPE=Debug" "-DIO2D_WITHOUT_TESTS=1" "-DCMAKE_MODULE_PATH="${{ github.workspace }}/thirdparty/P0267_RefImpl" ..
         cmake --build .
-
+        
     - name: Build main
       run: |
         cd ${{ github.workspace }}/build
