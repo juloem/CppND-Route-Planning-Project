@@ -66,7 +66,6 @@ TEST_F(RoutePlannerTest, TestCalculateHValue) {
     EXPECT_FLOAT_EQ(route_planner.CalculateHValue(start_node), 1.1329799);
     EXPECT_FLOAT_EQ(route_planner.CalculateHValue(end_node), 0.0f);
     EXPECT_FLOAT_EQ(route_planner.CalculateHValue(mid_node), 0.58903033);
-    EXPECT_EQ(1,2);
 }
 
 
